@@ -1,41 +1,43 @@
-/* MAIN LAYOUT CENTER FIX */
+/* ----- GLOBAL LAYOUT ----- */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #5abeff, #c7ebff);
     display: flex;
     flex-direction: column;
-    align-items: center;     /* Centers EVERYTHING horizontally */
+    align-items: center;   
     text-align: center;
 }
 
-/* Title */
+/* ----- TITLE ----- */
 .app-title {
     font-size: 32px;
     font-weight: bold;
     margin-top: 25px;
 }
 
-/* CENTER SEARCH AREA */
-.search-area {
+/* ----- FIXED CENTER SEARCH WRAPPER ----- */
+.search-wrapper {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center;     /* Center horizontally */
     margin-top: 20px;
 }
 
+/* Actual search box (input + button) */
 .search-box {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
+
     width: 90%;
-    max-width: 500px;
+    max-width: 500px;            /* prevents stretching */
 }
 
 /* Input */
 #cityInput {
-    width: 100%;
+    flex: 1;
     padding: 12px 15px;
     border: 2px solid #000;
     border-radius: 12px;
@@ -46,25 +48,27 @@ body {
 #searchBtn {
     padding: 12px 20px;
     background: #000;
-    color: #fff;
+    color: white;
+    border: none;
     border-radius: 12px;
     cursor: pointer;
-    border: none;
 }
 
-/* WEATHER CARD CENTER FIX */
+/* ----- WEATHER CARD (CENTERED) ----- */
 #weatherCard {
     width: 90%;
-    max-width: 500px;
+    max-width: 550px;
     margin-top: 25px;
+
     background: white;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     display: none;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* FORECAST SECTION */
+/* ----- FORECAST TITLE ----- */
 #forecastTitle {
     margin-top: 30px;
     font-size: 26px;
@@ -72,30 +76,31 @@ body {
     display: none;
 }
 
-/* FORECAST GRID CENTER FIX */
+/* ----- FORECAST GRID (CENTERED) ----- */
 #forecastBox {
     width: 100%;
     display: flex !important;
-    justify-content: center;       /* Center the items */
-    flex-wrap: wrap;               /* Make rows on mobile */
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
     padding: 10px;
     display: none;
 }
 
-/* Forecast item */
 .forecast-item {
-    width: 140px;
+    width: 150px;
     background: white;
     border-radius: 16px;
     padding: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* Mobile adjustments */
+/* ----- MOBILE ----- */
 @media (max-width: 480px) {
+
     .search-box {
         max-width: 350px;
+        width: 90%;
     }
 
     .forecast-item {
