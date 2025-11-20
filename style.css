@@ -1,191 +1,104 @@
-/* ===== GENERAL RESET ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
+/* MAIN LAYOUT CENTER FIX */
 body {
-    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #5abeff, #c7ebff);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    transition: background 0.3s ease-in-out;
-}
-
-/* ===== DEFAULT BACKGROUND (NO STRIPES) ===== */
-.default-bg {
-    background: linear-gradient(180deg, #66c7ff 0%, #cfefff 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-/* ===== SUNNY BACKGROUND ===== */
-.sunny {
-    background: linear-gradient(180deg, #ffde59 0%, #ff914d 100%);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-/* ===== CLOUDY BACKGROUND ===== */
-.cloudy {
-    background: linear-gradient(180deg, #d7d7d7 0%, #9ea7ad 100%);
-    background-attachment: fixed;
-}
-
-/* ===== RAINY BACKGROUND ===== */
-.rainy {
-    background: linear-gradient(180deg, #4a6572 0%, #232f34 100%);
-}
-
-/* ===== SNOW BACKGROUND ===== */
-.snow {
-    background: linear-gradient(180deg, #e9f7ff 0%, #b9dfff 100%);
-}
-
-/* ===== APP TITLE ===== */
-h1 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    align-items: center;     /* Centers EVERYTHING horizontally */
     text-align: center;
 }
 
-/* ===== SEARCH BAR ===== */
-.search-container {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
+/* Title */
+.app-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+/* CENTER SEARCH AREA */
+.search-area {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 90%;
     max-width: 500px;
 }
 
-input {
-    flex: 1;
+/* Input */
+#cityInput {
+    width: 100%;
     padding: 12px 15px;
     border: 2px solid #000;
-    border-radius: 10px;
+    border-radius: 12px;
     font-size: 16px;
-    outline: none;
 }
 
-button {
+/* Button */
+#searchBtn {
     padding: 12px 20px;
     background: #000;
     color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
+    border-radius: 12px;
     cursor: pointer;
+    border: none;
 }
 
-button:hover {
-    opacity: 0.8;
-}
-
-/* ===== WEATHER CARD ===== */
+/* WEATHER CARD CENTER FIX */
 #weatherCard {
-    width: 100%;
+    width: 90%;
     max-width: 500px;
+    margin-top: 25px;
     background: white;
-    padding: 25px;
-    border-radius: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     display: none;
-    text-align: center;
 }
 
-/* ===== WEATHER ICON ===== */
-#weatherIcon {
-    width: 100px;
-    height: 100px;
-}
-
-/* ===== FORECAST TITLE ===== */
+/* FORECAST SECTION */
 #forecastTitle {
+    margin-top: 30px;
     font-size: 26px;
     font-weight: bold;
-    text-align: center;
     display: none;
-    margin-bottom: 15px;
 }
 
-/* ===== 5-DAY FORECAST GRID ===== */
+/* FORECAST GRID CENTER FIX */
 #forecastBox {
-    display: none;
     width: 100%;
-    max-width: 800px;
-    margin-bottom: 40px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    display: flex !important;
+    justify-content: center;       /* Center the items */
+    flex-wrap: wrap;               /* Make rows on mobile */
+    gap: 20px;
+    padding: 10px;
+    display: none;
 }
 
+/* Forecast item */
 .forecast-item {
+    width: 140px;
     background: white;
+    border-radius: 16px;
     padding: 15px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.forecast-item img {
-    width: 60px;
-}
-
-/* ===== SUN ANIMATION (BEHIND UI) ===== */
-#sunAnim {
-    position: fixed;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: rgba(255, 223, 0, 0.7);
-    top: 30px;
-    right: 30px;
-    z-index: -1; /* FIXED — behind everything */
-    filter: blur(5px);
-    display: none;
-    animation: floatSun 6s ease-in-out infinite alternate;
-}
-
-@keyframes floatSun {
-    from { transform: translateY(0); }
-    to { transform: translateY(-20px); }
-}
-
-/* ===== RAIN ANIMATION ===== */
-#rainAnim {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image: url('https://i.imgur.com/5uEH6tG.png');
-    background-size: contain;
-    animation: rainMove 1s linear infinite;
-    display: none;
-}
-
-@keyframes rainMove {
-    from { background-position: 0 0; }
-    to { background-position: 0 100%; }
-}
-
-/* ===== RESPONSIVE FIXES ===== */
+/* Mobile adjustments */
 @media (max-width: 480px) {
-    h1 {
-        font-size: 26px;
+    .search-box {
+        max-width: 350px;
     }
 
-    button {
-        padding: 10px 14px;
-    }
-
-    #weatherCard {
-        padding: 20px;
+    .forecast-item {
+        width: 42%;
     }
 }
