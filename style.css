@@ -1,145 +1,191 @@
+/* ===== GENERAL RESET ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex-direction: column;
-    background: linear-gradient(to bottom, #9fd8ff, #ffffff);
+    align-items: center;
+    padding: 20px;
+    transition: background 0.3s ease-in-out;
+}
+
+/* ===== DEFAULT BACKGROUND (NO STRIPES) ===== */
+.default-bg {
+    background: linear-gradient(180deg, #66c7ff 0%, #cfefff 100%);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
-    transition: background 1s ease-in-out;
-    font-family: "Poppins", sans-serif;
 }
 
+/* ===== SUNNY BACKGROUND ===== */
 .sunny {
-    background: linear-gradient(to bottom, #ffeb3b, #ff9800);
+    background: linear-gradient(180deg, #ffde59 0%, #ff914d 100%);
     background-size: cover;
     background-attachment: fixed;
 }
 
+/* ===== CLOUDY BACKGROUND ===== */
 .cloudy {
-    background: linear-gradient(to bottom, #b3c1d1, #e3e9ef);
-    background-size: cover;
+    background: linear-gradient(180deg, #d7d7d7 0%, #9ea7ad 100%);
     background-attachment: fixed;
 }
 
+/* ===== RAINY BACKGROUND ===== */
 .rainy {
-    background: linear-gradient(to bottom, #455f73, #1b2735);
-    background-size: cover;
-    background-attachment: fixed;
+    background: linear-gradient(180deg, #4a6572 0%, #232f34 100%);
 }
 
+/* ===== SNOW BACKGROUND ===== */
 .snow {
-    background: linear-gradient(to bottom, #e0f7ff, #ffffff);
-    background-size: cover;
-    background-attachment: fixed;
+    background: linear-gradient(180deg, #e9f7ff 0%, #b9dfff 100%);
 }
 
-.default-bg {
-    background: linear-gradient(to bottom, #9fd8ff, #ffffff);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-.container {
-    width: 90%;
-    margin: auto;
-    padding-top: 30px;
+/* ===== APP TITLE ===== */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.searchBox {
+/* ===== SEARCH BAR ===== */
+.search-container {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
 }
 
-.searchBox input {
-    padding: 10px;
-    width: 50%;
-    border-radius: 8px;
-    border: 2px solid #333;
+input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
 }
 
-.searchBox button {
-    padding: 10px 20px;
-    background: black;
-    color: white;
+button {
+    padding: 12px 20px;
+    background: #000;
+    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.weather-card {
-    display: none;
-    margin-top: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+button:hover {
+    opacity: 0.8;
 }
 
-.forecast-box {
+/* ===== WEATHER CARD ===== */
+#weatherCard {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-bottom: 25px;
     display: none;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    text-align: center;
+}
+
+/* ===== WEATHER ICON ===== */
+#weatherIcon {
+    width: 100px;
+    height: 100px;
+}
+
+/* ===== FORECAST TITLE ===== */
+#forecastTitle {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+    margin-bottom: 15px;
+}
+
+/* ===== 5-DAY FORECAST GRID ===== */
+#forecastBox {
+    display: none;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
-    margin-top: 20px;
 }
 
 .forecast-item {
     background: white;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 20px;
     text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* Rain Animation */
-.rain {
-    display: none;
+.forecast-item img {
+    width: 60px;
+}
+
+/* ===== SUN ANIMATION (BEHIND UI) ===== */
+#sunAnim {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://i.imgur.com/qWHdZ8V.png');
-    animation: rain 0.3s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes rain {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 30px; }
-}
-
-/* Sun Animation */
-.sun {
-    display: none;
-    position: fixed;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(255, 223, 0, 0.7);
     top: 30px;
     right: 30px;
-    width: 80px;
-    height: 80px;
-    background: yellow;
-    border-radius: 50%;
-    animation: spin 5s linear infinite;
+    z-index: -1; /* FIXED — behind everything */
+    filter: blur(5px);
+    display: none;
+    animation: floatSun 6s ease-in-out infinite alternate;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes floatSun {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+}
+
+/* ===== RAIN ANIMATION ===== */
+#rainAnim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image: url('https://i.imgur.com/5uEH6tG.png');
+    background-size: contain;
+    animation: rainMove 1s linear infinite;
+    display: none;
+}
+
+@keyframes rainMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 100%; }
+}
+
+/* ===== RESPONSIVE FIXES ===== */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 26px;
+    }
+
+    button {
+        padding: 10px 14px;
+    }
+
+    #weatherCard {
+        padding: 20px;
+    }
 }
