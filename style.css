@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    transition: background 0.5s ease-in-out;
+}
+
+.default-bg {
+    background: linear-gradient(to bottom, #89cff0, #ffffff);
+}
+
+.sunny {
+    background: linear-gradient(to bottom, #f9d423, #ff4e50);
+}
+
+.cloudy {
+    background: linear-gradient(to bottom, #757f9a, #d7dde8);
+}
+
+.rainy {
+    background: linear-gradient(to bottom, #4b79a1, #283e51);
+}
+
+.snow {
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.searchBox {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.searchBox input {
+    padding: 10px;
+    width: 50%;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+.searchBox button {
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.weather-card {
+    display: none;
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.forecast-box {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.forecast-item {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+/* Rain Animation */
+.rain {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.imgur.com/qWHdZ8V.png');
+    animation: rain 0.3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rain {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 30px; }
+}
+
+/* Sun Animation */
+.sun {
+    display: none;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    background: yellow;
+    border-radius: 50%;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
