@@ -35,4 +35,6 @@ Just open `index.html` in any browser.
 Built by : Ragini Rajpoot 🩶🤍
 
 
-🌏 Demo: 
+🌏 Demo: https://inigar.github.io/WeatherApp/
+(paste this link in browser and see the output)
+
