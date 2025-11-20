@@ -6,27 +6,50 @@
 }
 
 body {
-    transition: background 0.5s ease-in-out;
-}
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #9fd8ff, #ffffff);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
-.default-bg {
-    background: linear-gradient(to bottom, #89cff0, #ffffff);
+    transition: background 1s ease-in-out;
+    font-family: "Poppins", sans-serif;
 }
 
 .sunny {
-    background: linear-gradient(to bottom, #f9d423, #ff4e50);
+    background: linear-gradient(to bottom, #ffeb3b, #ff9800);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .cloudy {
-    background: linear-gradient(to bottom, #757f9a, #d7dde8);
+    background: linear-gradient(to bottom, #b3c1d1, #e3e9ef);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .rainy {
-    background: linear-gradient(to bottom, #4b79a1, #283e51);
+    background: linear-gradient(to bottom, #455f73, #1b2735);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .snow {
-    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    background: linear-gradient(to bottom, #e0f7ff, #ffffff);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.default-bg {
+    background: linear-gradient(to bottom, #9fd8ff, #ffffff);
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .container {
