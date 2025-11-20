@@ -32,4 +32,7 @@ Just open `index.html` in any browser.
 
 ---
 
-Made with ❤️ for learning & projects.
+Built by : Ragini Rajpoot 🩶🤍
+
+
+🌏 Demo: 
