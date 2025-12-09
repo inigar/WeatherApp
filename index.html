@@ -3,34 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Weather App</title>
+    <title>Advanced Weather App</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="default-bg">
+<body>
 
-    <div class="container">
-        <h1 class="title">Weather Forecast App</h1>
+<div class="container">
+    <h2>Weather App</h2>
 
-        <div class="searchBox">
-            <input type="text" id="cityInput" placeholder="Enter city name...">
-            <button onclick="getWeather()">Search</button>
-        </div>
-
-        <div id="weatherCard" class="weather-card">
-            <h2 id="cityName"></h2>
-            <img id="weatherIcon">
-            <h1 id="temp"></h1>
-            <p id="condition"></p>
-            <p id="aqi"></p>
-        </div>
-
-        <h2 id="forecastTitle" style="display:none;"></h2>
-        <div id="forecastBox" class="forecast-box"></div>
+    <div class="search-box">
+        <input type="text" id="cityInput" placeholder="Enter city name">
+        <button onclick="getWeather()">Search</button>
     </div>
 
-    <div id="rainAnim" class="rain"></div>
-    <div id="sunAnim" class="sun"></div>
+    <div id="currentWeather" class="fade"></div>
 
-    <script src="script.js"></script>
+    <h3 class="forecast-title fade">5-Day Forecast</h3>
+    <div id="forecast" class="forecast-container fade"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
