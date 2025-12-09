@@ -18,7 +18,7 @@ async function getWeather() {
     try {
         // CURRENT WEATHER
         const weatherURL =
-            `https://api.weatherapi.com/v1/current.json?key=a5990adb226f4b9ea39162654250912&q=London&aqi=no`;
+            `http://api.weatherapi.com/v1/current.json?key=a5990adb226f4b9ea39162654250912&q=London&aqi=yes`;
 
         const weatherRes = await fetch(weatherURL);
         const weatherData = await weatherRes.json();
