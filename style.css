@@ -2,121 +2,92 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial;
+    font-family: Poppins, sans-serif;
 }
 
 body {
-    transition: background 0.5s ease-in-out;
-}
-
-.default-bg {
-    background: linear-gradient(to bottom, #89cff0, #ffffff);
-}
-
-.sunny {
-    background: linear-gradient(to bottom, #f9d423, #ff4e50);
-}
-
-.cloudy {
-    background: linear-gradient(to bottom, #757f9a, #d7dde8);
-}
-
-.rainy {
-    background: linear-gradient(to bottom, #4b79a1, #283e51);
-}
-
-.snow {
-    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     width: 90%;
-    margin: auto;
-    padding-top: 30px;
-    text-align: center;
-}
-
-.title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.searchBox {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.searchBox input {
-    padding: 10px;
-    width: 50%;
-    border-radius: 8px;
-    border: 2px solid #333;
-}
-
-.searchBox button {
-    padding: 10px 20px;
-    background: black;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.weather-card {
-    display: none;
-    margin-top: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.forecast-box {
-    display: none;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.forecast-item {
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
     text-align: center;
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* Rain Animation */
-.rain {
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://i.imgur.com/qWHdZ8V.png');
-    animation: rain 0.3s linear infinite;
-    pointer-events: none;
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-@keyframes rain {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 30px; }
+.search-box input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
 }
 
-/* Sun Animation */
-.sun {
-    display: none;
-    position: fixed;
-    top: 30px;
-    right: 30px;
-    width: 80px;
-    height: 80px;
-    background: yellow;
-    border-radius: 50%;
-    animation: spin 5s linear infinite;
+.search-box button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    background: #ffffff33;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.search-box button:hover {
+    background: #ffffff55;
+}
+
+/* Forecast cards */
+.forecast-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.card {
+    min-width: 110px;
+    background: rgba(255, 255, 255, 0.20);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    animation: slideUp 0.7s ease forwards;
+    opacity: 0;
+}
+
+.card img {
+    width: 55px;
+}
+
+/* Fade + Slide animations */
+.fade {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
