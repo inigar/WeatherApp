@@ -1,66 +1,57 @@
+const apiKey = "a5990adb226f4b9ea39162654250912";
+
 async function getWeather() {
-    const city = document.getElementById("cityInput").value || "London";
+    const city = document.getElementById("cityInput").value;
 
-    const url = `http://api.weatherapi.com/v1/current.json?key=a5990adb226f4b9ea39162654250912&q=London&aqi=no`;
+    if (!city) return alert("Enter city name");
 
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
+    // ---- CURRENT WEATHER ----
+    const weatherURL =
+        `https://api.weatherapi.com/v1/current.json?key=a5990adb226f4b9ea39162654250912&q=London&aqi=no`;
 
-        // CURRENT WEATHER
-        document.getElementById("cityName").innerText =
-            `${data.location.name}, ${data.location.country}`;
-        document.getElementById("temp").innerText = data.current.temp_c + "°C";
-        document.getElementById("condition").innerText = data.current.condition.text;
-        document.getElementById("aqi").innerText = "AQI: " + data.current.air_quality.pm2_5;
-        document.getElementById("weatherIcon").src =
-            "https:" + data.current.condition.icon;
+    const weatherRes = await fetch(weatherURL);
+    const weatherData = await weatherRes.json();
 
-        document.getElementById("weatherCard").style.display = "block";
-
-        // BACKGROUND + ANIMATION
-        const condition = data.current.condition.text.toLowerCase();
-
-        document.body.className = "default-bg";
-        document.getElementById("rainAnim").style.display = "none";
-        document.getElementById("sunAnim").style.display = "none";
-
-        if (condition.includes("sun") || condition.includes("clear")) {
-            document.body.className = "sunny";
-            document.getElementById("sunAnim").style.display = "block";
-        }
-        else if (condition.includes("cloud")) {
-            document.body.className = "cloudy";
-        }
-        else if (condition.includes("rain") || condition.includes("drizzle")) {
-            document.body.className = "rainy";
-            document.getElementById("rainAnim").style.display = "block";
-        }
-        else if (condition.includes("snow")) {
-            document.body.className = "snow";
-        }
-
-        // 5-day forecast
-        document.getElementById("forecastTitle").innerText = "5-Day Forecast";
-        document.getElementById("forecastTitle").style.display = "block";
-
-        const forecastBox = document.getElementById("forecastBox");
-        forecastBox.innerHTML = "";
-        forecastBox.style.display = "grid";
-
-        data.forecast.forecastday.forEach(day => {
-            const item = `
-                <div class="forecast-item">
-                    <h4>${day.date}</h4>
-                    <img src="https:${day.day.condition.icon}">
-                    <p>${day.day.avgtemp_c}°C</p>
-                    <p>${day.day.condition.text}</p>
-                </div>
-            `;
-            forecastBox.innerHTML += item;
-        });
-
-    } catch (error) {
-        alert("City not found or API error!");
+    if (weatherData.cod === "404") {
+        document.getElementById("currentWeather").innerHTML = `<h3>City Not Found</h3>`;
+        return;
     }
+
+    document.getElementById("currentWeather").innerHTML = `
+        <h2>${weatherData.name}</h2>
+        <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png">
+        <h1>${weatherData.main.temp}°C</h1>
+        <p>${weatherData.weather[0].description}</p>
+    `;
+
+    // ---- 5-DAY FORECAST ----
+    const forecastURL =
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+    const forecastRes = await fetch(forecastURL);
+    const forecastData = await forecastRes.json();
+
+    const forecastBox = document.getElementById("forecast");
+    forecastBox.innerHTML = "";
+
+    const daily = {};
+
+    forecastData.list.forEach(item => {
+        const date = item.dt_txt.split(" ")[0];
+        if (!daily[date] && item.dt_txt.includes("12:00:00")) {
+            daily[date] = item;
+        }
+    });
+
+    Object.values(daily).forEach((day, index) => {
+        const card = `
+            <div class="card" style="animation-delay:${index * 0.2}s">
+                <h4>${new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'short' })}</h4>
+                <img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png">
+                <p>${Math.round(day.main.temp)}°C</p>
+                <small>${day.weather[0].description}</small>
+            </div>
+        `;
+        forecastBox.innerHTML += card;
+    });
 }
