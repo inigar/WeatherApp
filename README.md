@@ -25,7 +25,7 @@ A modern weather application with:
 ## 🚀 How to Use
 1. Enter a city name  
 2. Click "Search"  
-3. View current weather + 5-day forecast  
+3. View current weather + 3-day forecast  
 
 ## 📦 Installation
 Just open `index.html` in any browser.
