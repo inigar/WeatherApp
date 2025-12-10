@@ -3,18 +3,15 @@
 A modern weather application with:
 
 ✔ Live weather  
-✔ Dynamic background changes  
 ✔ Rain & Sun animations  
-✔ 5-day forecast  
+✔ 3-day forecast  
 ✔ Fully responsive UI  
 
 ## 📌 Features
 - Real-time weather data  
 - Weather-based UI themes  
-- Forecast for 5 days  
-- Air Quality Index  
-- Rain animation  
-- Spinning sun animation  
+- Forecast for 3 days  
+- Humidity 
 
 ## 🛠 Technologies Used
 - HTML  
