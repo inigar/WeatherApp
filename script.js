@@ -14,7 +14,7 @@ async function getWeather() {
     }
 
     try {
-        // WeatherAPI forecast (5 days)
+        // WeatherAPI forecast (3 days)
         const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=5&aqi=no&alerts=no`;
 
         const res = await fetch(url);
@@ -34,7 +34,7 @@ async function getWeather() {
             <p>${data.current.condition.text}</p>
         `;
 
-        // FORECAST (5 days)
+        // FORECAST (3 days)
         const forecastBox = document.getElementById("forecast");
         forecastBox.innerHTML = "";
 
