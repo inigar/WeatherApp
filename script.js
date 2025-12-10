@@ -2,9 +2,7 @@ const apiKey = "a5990adb226f4b9ea39162654250912";
 
 document.getElementById("searchBtn").addEventListener("click", getWeather);
 document.getElementById("cityInput").addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-        getWeather();
-    }
+    if (e.key === "Enter") getWeather();
 });
 
 async function getWeather() {
@@ -16,27 +14,28 @@ async function getWeather() {
     }
 
     try {
-        // CURRENT WEATHER
+        // CURRENT WEATHER (WeatherAPI)
         const weatherURL =
-            `http://api.weatherapi.com/v1/current.json?key=a5990adb226f4b9ea39162654250912&q=London&aqi=yes`;
+            `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
 
         const weatherRes = await fetch(weatherURL);
         const weatherData = await weatherRes.json();
 
-        if (weatherData.cod === "404") {
+        if (weatherData.error) {
             document.getElementById("currentWeather").innerHTML = `<h3>City Not Found</h3>`;
             document.getElementById("forecast").innerHTML = "";
             return;
         }
 
+        // Display current weather
         document.getElementById("currentWeather").innerHTML = `
-            <h2>${weatherData.name}</h2>
-            <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png">
-            <h1>${weatherData.main.temp}°C</h1>
-            <p>${weatherData.weather[0].description}</p>
+            <h2>${weatherData.location.name}</h2>
+            <img src="${weatherData.current.condition.icon}">
+            <h1>${weatherData.current.temp_c}°C</h1>
+            <p>${weatherData.current.condition.text}</p>
         `;
 
-        // FORECAST
+        // FORECAST (OpenWeather API)
         const forecastURL =
             `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -46,7 +45,7 @@ async function getWeather() {
         const forecastBox = document.getElementById("forecast");
         forecastBox.innerHTML = "";
 
-        // Filter one forecast per day (12 PM)
+        // Filter one forecast per day at 12 PM
         const daily = {};
 
         forecastData.list.forEach(item => {
