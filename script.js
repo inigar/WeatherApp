@@ -1,7 +1,7 @@
 const apiKey = "a5990adb226f4b9ea39162654250912";
 
 document.getElementById("searchBtn").addEventListener("click", getWeather);
-document.getElementById("cityInput").addEventListener("keypress", function(e) {
+document.getElementById("cityInput").addEventListener("keypress", function (e) {
     if (e.key === "Enter") getWeather();
 });
 
@@ -14,60 +14,43 @@ async function getWeather() {
     }
 
     try {
-        // CURRENT WEATHER (WeatherAPI)
-        const weatherURL =
-            `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
+        // WeatherAPI forecast (5 days)
+        const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=5&aqi=no&alerts=no`;
 
-        const weatherRes = await fetch(weatherURL);
-        const weatherData = await weatherRes.json();
+        const res = await fetch(url);
+        const data = await res.json();
 
-        if (weatherData.error) {
+        if (data.error) {
             document.getElementById("currentWeather").innerHTML = `<h3>City Not Found</h3>`;
             document.getElementById("forecast").innerHTML = "";
             return;
         }
 
-        // Display current weather
+        // CURRENT WEATHER
         document.getElementById("currentWeather").innerHTML = `
-            <h2>${weatherData.location.name}</h2>
-            <img src="${weatherData.current.condition.icon}">
-            <h1>${weatherData.current.temp_c}°C</h1>
-            <p>${weatherData.current.condition.text}</p>
+            <h2>${data.location.name}</h2>
+            <img src="${data.current.condition.icon}">
+            <h1>${data.current.temp_c}°C</h1>
+            <p>${data.current.condition.text}</p>
         `;
 
-        // FORECAST (OpenWeather API)
-        const forecastURL =
-            `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-
-        const forecastRes = await fetch(forecastURL);
-        const forecastData = await forecastRes.json();
-
+        // FORECAST (5 days)
         const forecastBox = document.getElementById("forecast");
         forecastBox.innerHTML = "";
 
-        // Filter one forecast per day at 12 PM
-        const daily = {};
-
-        forecastData.list.forEach(item => {
-            const date = item.dt_txt.split(" ")[0];
-            if (!daily[date] && item.dt_txt.includes("12:00:00")) {
-                daily[date] = item;
-            }
-        });
-
-        Object.values(daily).forEach(day => {
+        data.forecast.forecastday.forEach(day => {
             const card = `
                 <div class="card">
-                    <h4>${new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'short' })}</h4>
-                    <img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png">
-                    <p>${Math.round(day.main.temp)}°C</p>
-                    <small>${day.weather[0].description}</small>
+                    <h4>${day.date}</h4>
+                    <img src="${day.day.condition.icon}">
+                    <p>${Math.round(day.day.avgtemp_c)}°C</p>
+                    <small>${day.day.condition.text}</small>
                 </div>
             `;
             forecastBox.innerHTML += card;
         });
 
     } catch (error) {
-        alert("Network error or invalid API key");
+        alert("Network error — check API key");
     }
 }
